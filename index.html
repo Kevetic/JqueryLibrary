@@ -37,6 +37,13 @@
               document.querySelectorAll(selector);
           }
         }
+        html(innerhtml) {
+          console.log('html is working');
+          this.elements.forEach((item) => {
+            item.innerHTML = innerhtml;
+          });
+          return this;
+        }
         hide() {
           this.elements.forEach((item) => {
             item.preDispaly = item.style.display;
@@ -66,40 +73,33 @@
         }
       }
 
-      const $$ = function (selector) {
-        return new KQuery(selector);
-      };
+const $$ = function (selector) {
+return new KQuery(selector);
+};
 
-    $$('#button-container button').hide()
+$$('#button-container button').hide()
 
-    $$('#button-container button').on(
-    'click',
-        function (event) {
-        if($$('button#btnTwo').hide()){
-            $$('#button-container button').reload()
-            }
+$$('#button-container button').html('Reload Page').on('click',function (event) {
+    if($$('button#btnTwo').hide()){
+        $$('#button-container button').reload()
         }
-        );
+    }
+);
                 
 $$('button#btnOne').hide()
-    var a = $$('button.continue#btnOne')
-    .html('Button 1')
-    .on('click', () => {
-        if($$('button#btnTwo').hide()){
-        console.log('this is true')
-        $$('button#btnOne').hide()
-        $$('#button-container button').show()
-    } 
-    });
-    var c = $$('button.continue#btnTwo')
-    .html('Button 2')
-    .on('click', () => {
+let a = $$('button.continue#btnOne').html('Show Button 3').on('click', () => {
     if($$('button#btnTwo').hide()){
-        console.log('this is true')
-        $$('button#btnOne').show()
-        $$('button#btnTwo').hide()
-    }
-    });
+    $$('button#btnOne').hide()
+    $$('#button-container button').show()
+} 
+});
+
+let c = $$('button.continue#btnTwo').html('Show Button 2').on('click', () => {
+if($$('button#btnTwo').hide()){
+    $$('button#btnOne').show()
+    $$('button#btnTwo').hide()
+}
+});
     </script>
   </body>
 </html>
