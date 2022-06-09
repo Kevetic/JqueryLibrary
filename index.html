@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <title>JQuery</title>
+  </head>
+  <body>
+    <button class="continue" id="btnOne">Button 1</button>
+    <button class="continue" id="btnTwo">Button 2</button>
+    <div id="button-container">
+      <button>Show</button>
+    </div>
+
+    <script>
+      class KQuery {
+        constructor(selector) {
+          if (
+            (selector === window) |
+            (selector === document)
+          ) {
+            this.elements = [selector];
+          } else {
+            this.elements =
+              document.querySelectorAll(selector);
+          }
+        }
+        hide() {
+          this.elements.forEach((item) => {
+            item.preDispaly = item.style.display;
+            item.style.display = 'none';
+          });
+          return this;
+        }
+        on(eventType, callback) {
+          this.elements.forEach((item) => {
+            item.addEventListener(
+              eventType,
+              callback
+            );
+          });
+          return this;
+        }
+        show() {
+          this.elements.forEach((item) => {
+            item.style.display = item.preDispaly;
+          });
+          return this;
+        }
+        reload(){
+            this.elements.forEach((item) => {
+                window.location.reload()
+            })
+        }
+      }
+
+      const $$ = function (selector) {
+        return new KQuery(selector);
+      };
+
+    $$('#button-container button').hide()
+
+    $$('#button-container button').on(
+    'click',
+        function (event) {
+        if($$('button#btnTwo').hide()){
+            $$('#button-container button').reload()
+            }
+        }
+        );
+                
+$$('button#btnOne').hide()
+    var a = $$('button.continue#btnOne')
+    .html('Button 1')
+    .on('click', () => {
+        if($$('button#btnTwo').hide()){
+        console.log('this is true')
+        $$('button#btnOne').hide()
+        $$('#button-container button').show()
+    } 
+    });
+    var c = $$('button.continue#btnTwo')
+    .html('Button 2')
+    .on('click', () => {
+    if($$('button#btnTwo').hide()){
+        console.log('this is true')
+        $$('button#btnOne').show()
+        $$('button#btnTwo').hide()
+    }
+    });
+    </script>
+  </body>
+</html>
